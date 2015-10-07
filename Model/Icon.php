@@ -1,5 +1,7 @@
 <?php
-namespace fhu\BootstrapToolbar;
+namespace fhu\BootstrapToolbar\Model;
+
+use fhu\BootstrapToolbar\Toolbar;
 
 class Icon
 {
@@ -286,8 +288,8 @@ class Icon
     public function getOnClick()
     {
         $jsMethod = 'goToDynamicLink' . $this->toolbar->getRenderCount();
-        $linkId = $this->toolbar->getLinkId();
-        $containerId = $this->toolbar->getContainerId();
+        $linkId = $this->toolbar->config->getLinkId();
+        $containerId = $this->toolbar->config->getContainerId();
         $href = $this->getLink();
         $confirm = $this->jsEscape($this->getCheckConfirmMessage());
 
