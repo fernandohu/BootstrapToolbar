@@ -66,6 +66,11 @@ class Icon
     protected $toolbar;
 
     /**
+     * @var string
+     */
+    protected $onClick;
+
+    /**
      * @param $id
      * @param Toolbar $toolbar
      */
@@ -156,6 +161,10 @@ class Icon
      */
     public function getLink()
     {
+        if ($this->onClick) {
+            return 'javascript:void(0);';
+        }
+
         $link = $this->link;
 
         if ($this->isCheckSingleLink() || $this->isCheckMultipleLink()) {
@@ -287,6 +296,10 @@ class Icon
      */
     public function getOnClick()
     {
+        if ($this->onClick) {
+            return $this->onClick;
+        }
+
         $jsMethod = 'goToDynamicLink' . $this->toolbar->getRenderCount();
         $linkId = $this->toolbar->config->getLinkId();
         $containerId = $this->toolbar->config->getContainerId();
@@ -308,6 +321,14 @@ class Icon
         }
 
         return '';
+    }
+
+    /**
+     * @param $onClick
+     */
+    public function setOnClick($onClick)
+    {
+        $this->onClick = $onClick;
     }
 
     protected function jsEscape($value)
