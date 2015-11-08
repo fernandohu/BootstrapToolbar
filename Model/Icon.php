@@ -167,9 +167,9 @@ class Icon
 
         $link = $this->link;
 
-        if ($this->isCheckSingleLink() || $this->isCheckMultipleLink()) {
+        /*if ($this->isCheckSingleLink() || $this->isCheckMultipleLink()) {
             return $link;
-        }
+        }*/
 
         if ($this->isAutoCompleteLink()) {
             $parsedUrl = parse_url($_SERVER['REQUEST_URI']);
@@ -179,7 +179,11 @@ class Icon
                 parse_str($parsedUrl['query'], $parts);
             }
 
-            $link .= '?' . http_build_query($parts);
+            $queryParts = http_build_query($parts);;
+            if ($queryParts) {
+                $link .= '?' . $queryParts;
+            }
+
         }
 
         return $link;
